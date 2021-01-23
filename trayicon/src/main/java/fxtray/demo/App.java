@@ -39,17 +39,14 @@ public class App extends Application {
                 
         // Actions
         FXTrayIcon icon = new FXTrayIcon(primaryStage, getClass().getResource("/Icon.png"));
-        primaryStage.setOnCloseRequest(event->icon.hide());
-        showTrayIcon.setOnAction(evt->{
-        	  
-              MenuItem fxMenuItem = new MenuItem("Say Hello from Tray");
-              fxMenuItem.setOnAction(event->{
-              	textField.setText("Hello from Sys Tray");
-              });
-              
-              icon.addMenuItem(fxMenuItem);
-              icon.show();
+        MenuItem fxMenuItem = new MenuItem("Say Hello from Tray");
+        icon.addMenuItem(fxMenuItem);
+        fxMenuItem.setOnAction(event->{
+        	textField.setText("Hello from Sys Tray");
         });
+        
+        primaryStage.setOnCloseRequest(event->icon.hide());
+        showTrayIcon.setOnAction(evt->icon.show());
         
         hideTrayIcon.setOnAction(evt->icon.hide());
         showErrorMessage.setOnAction(evt->icon.showErrorMessage("Error!", "A message or a stack trace\n or something else."));
